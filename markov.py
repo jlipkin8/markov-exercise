@@ -53,7 +53,6 @@ def make_chains(text_string):
         chains[pair].append(words[(i+2)%len(words)])
 
     # your code goes here
-    print chains
     return chains
 
 
@@ -61,10 +60,18 @@ def make_text(chains):
     """Return text from chains."""
 
     words = []
+    first_key = choice(chains.keys())
+    first_choice = choice(chains[first_key])
+    link = [first_key[0], first_key[1], first_choice]
+    words.extend(link)
 
-    # your code goes here
+    for chain in chains:
+        current_key = (words[-2], words[-1])
+        new_choice = choice(chains[current_key])
 
-    return " ".join(words)
+        words.append(new_choice)
+
+    print " ".join(words)
 
 
 input_path = "green-eggs.txt"
