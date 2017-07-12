@@ -65,17 +65,17 @@ def make_text(chains):
     link = [first_key[0], first_key[1], first_choice]
     words.extend(link)
 
-    for chain in chains:
+    while True:
         current_key = (words[-2], words[-1])
         new_choice = choice(chains[current_key])
 
         words.append(new_choice)
-
+        if len(words) > 10 and (words[-1][-1] == '?' or words[-1][-1] == "!"):
+            break
     print " ".join(words)
 
 
 input_path = "green-eggs.txt"
-
 # Open the file and turn it into one long string
 input_text = open_and_read_file(input_path)
 
