@@ -55,24 +55,26 @@ def make_chains(text_string):
 
 def make_text(chains):
     """Return text from chains."""
-
     words = []
-    first_key = choice(chains.keys())
-    first_choice = choice(chains[first_key])
-    link = [first_key[0], first_key[1], first_choice]
-    words.extend(link)
+    key = choice(chains.keys())
+    words.extend(list(key))
+    word = choice(chains[key])
+    words.append(word)
+    link = list(key) + [word]
 
-    while True:
-        current_key = (words[-2], words[-1])
-        new_choice = choice(chains[current_key])
-
-        words.append(new_choice)
-        if len(words) > 10 and (words[-1][-1] == '?' or words[-1][-1] == "!"):
+    while True: 
+        key = (link[1], link[2])
+        if not chains.get(key): 
             break
-    print " ".join(words)
+        word = choice(chains[key])
+        link = list(key) + [word]
+        words.append(word)
+
+    return " ".join(words)
 
 
-input_path = "green-eggs.txt"
+input_path = sys.argv[1]
+
 # Open the file and turn it into one long string
 input_text = open_and_read_file(input_path)
 
