@@ -12,7 +12,7 @@ def open_and_read_file(file_path):
     f = open(file_path)
     contents = f.read()
     f.close()
-    
+
     return contents
 
 
@@ -42,18 +42,14 @@ def make_chains(text_string):
     """
 
     chains = {}
-
     words = text_string.split()
-    for i in range(len(words)):
-        # if i < len(words) - 1:
-        #     j = i + 1
+    for i in range(len(words) - 2):
+        n_gram = (words[i], words[i + 1])
+        if n_gram not in chains: 
+            chains[n_gram] = [words[i + 2]]
+        else: 
+            chains[n_gram].append(words[i + 2])
 
-        pair = (words[i], words[(i+1)%len(words)])
-        if not pair in chains:
-            chains[pair] = []
-        chains[pair].append(words[(i+2)%len(words)])
-
-    # your code goes here
     return chains
 
 
