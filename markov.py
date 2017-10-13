@@ -1,6 +1,7 @@
 """Generate Markov text from text files."""
 
 from random import choice
+import sys
 
 
 def open_and_read_file(file_path):
@@ -60,7 +61,7 @@ def n_make_chains(text_string,n):
         for j in range(n):
             n_gram += (words[j],)
 
-        if n_gram no in chains: 
+        if n_gram not in chains: 
             chains[n_gram] = [words[i + n]]
         else: 
             chains[n_gram].append(words[i + n])
@@ -96,6 +97,6 @@ input_text = open_and_read_file(input_path)
 # chains = make_chains(input_text)
 
 # Produce random text
-random_text = make_text(chains)
+# random_text = make_text(chains)
 
-print random_text
+# print random_text
