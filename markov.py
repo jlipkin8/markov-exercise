@@ -44,6 +44,7 @@ def open_and_read_file(file_path):
 
 #     chains = {}
 #     words = text_string.split()
+#     words.append(None)
 #     for i in range(len(words) - 2):
 #         n_gram = (words[i], words[i + 1])
 #         if n_gram not in chains: 
@@ -56,6 +57,7 @@ def open_and_read_file(file_path):
 def n_make_chains(text_string,n):
     chains = {}
     words = text_string.split()
+    words.append(None)
     for i in range(len(words) - n):
         n_gram = (words[i],)
         for j in range(1,n):
