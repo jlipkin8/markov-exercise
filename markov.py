@@ -10,6 +10,7 @@ def open_and_read_file(file_path):
     Takes a string that is a file path, opens the file, and turns
     the file's contents as one string of text.
     """
+    print "open_and_read_file"
     f = open(file_path)
     contents = f.read()
     f.close()
@@ -72,23 +73,24 @@ def n_make_chains(text_string,n):
 
 def make_text(chains):
     """Return text from chains."""
-    words = []
+
     key = choice(chains.keys())
-    words.extend(list(key))
-    word = choice(chains[key])
-    words.append(word)
-    link = list(key) + [word]
+    words = [key[0], key[1]]
+    # word = choice(chains[key])
+    word = choice(chains.get(key))
 
-    while True: 
-        key = (link[1], link[2])
-        if not chains.get(key): 
-            break
-        word = choice(chains[key])
-        link = list(key) + [word]
+    # Keep looping until we reach a value of None
+    # (which would mean it was the end of our original text)
+    # Note that for long texts (like a full book), this might mean
+    # it would run for a very long time.
+
+    while word is not None:
+        key = (key[1], word)
         words.append(word)
-
+        # word = choice(chains[key])
+        word = choice(chains.get(key))
+        
     return " ".join(words)
-
 
 input_path = sys.argv[1]
 
