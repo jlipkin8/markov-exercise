@@ -10,7 +10,6 @@ def open_and_read_file(file_path):
     Takes a string that is a file path, opens the file, and turns
     the file's contents as one string of text.
     """
-    print "open_and_read_file"
     f = open(file_path)
     contents = f.read()
     f.close()
@@ -74,7 +73,11 @@ def n_make_chains(text_string,n):
 def make_text(chains):
     """Return text from chains."""
 
+    # continue until key starts with capitalized word
     key = choice(chains.keys())
+    while not key[0].isupper(): 
+        key = choice(chains.keys())
+
     words = [key[0], key[1]]
     # word = choice(chains[key])
     word = choice(chains.get(key))
@@ -89,8 +92,9 @@ def make_text(chains):
         words.append(word)
         # word = choice(chains[key])
         word = choice(chains.get(key))
-        
+
     return " ".join(words)
+
 
 input_path = sys.argv[1]
 
@@ -98,9 +102,9 @@ input_path = sys.argv[1]
 input_text = open_and_read_file(input_path)
 
 # Get a Markov chain
-# chains = make_chains(input_text)
+chains = n_make_chains(input_text,2)
 
 # Produce random text
-# random_text = make_text(chains)
+random_text = make_text(chains)
 
-# print random_text
+print random_text
